@@ -6,6 +6,7 @@ use App\Article;
 use App\Http\Requests\ArticleRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class ArticlesController extends Controller
@@ -35,10 +36,12 @@ class ArticlesController extends Controller
     {
 
     //    $input = Request::all();
-
     //    $input['published_at'] = Carbon::now();
 
-        Article::create($request->all());
+        $article = new Article($request->all());
+
+        Auth::user()->articles()->save($article);
+
         return redirect('articles');
     }
 

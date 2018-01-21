@@ -28,3 +28,8 @@ Route::get('/about', 'PagesController@about');
 //Route::post('articles', 'ArticlesController@store');
 
 Route::resource('articles','ArticlesController');
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
