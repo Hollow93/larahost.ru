@@ -11,6 +11,10 @@
 |
 */
 
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -27,9 +31,13 @@ Route::get('/about', 'PagesController@about');
 //
 //Route::post('articles', 'ArticlesController@store');
 
-Route::resource('articles','ArticlesController');
+Route::resource('articles', 'ArticlesController');
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('foo', ['middleware' => 'manager', function () {
+    return 'view only managers';
+}]);
