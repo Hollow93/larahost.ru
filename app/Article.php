@@ -11,7 +11,8 @@ class Article extends Model
         [
             'title',
             'body',
-            'published_at'
+            'published_at',
+            'user_id' // temporary!!
         ];
 
     protected $dates = ['published_at'];
@@ -25,8 +26,14 @@ class Article extends Model
     {
         $query->where('published_at', '>', Carbon::now());
     }
+
     public function setPublishedAtAttribute($date)
     {
         $this->attributes['published_at'] = Carbon::createFromFormat('Y-m-d', $date);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }
